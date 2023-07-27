@@ -1,0 +1,527 @@
+@charset "utf-8";
+.element {
+  margin-top: 0;
+}
+
+body{
+  overflow: hidden;
+}
+
+/*========= ローディング画面のためのCSS ===============*/
+#splash {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999999;
+  text-align:center;
+}
+
+.spinner-wrapper {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background:linear-gradient(rgb(46, 45, 45),rgb(19, 18, 18));
+  position: absolute;
+  z-index: 15;
+  
+}
+
+.spinner {
+  margin: 0;
+  display: block;
+  position: absolute;
+  left: calc(40% - 25px);
+  top: calc(49.5% - 10px);
+  border: 36px solid rgb(182, 211, 16);
+  width: 1px;
+  height: 1px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-radius: 50px;
+  animation: spin 1.5s infinite;
+  z-index: 50;
+  
+}
+
+
+.splash-logo {
+  position: absolute;
+  top: calc(53% - 20px);
+  left: 47% !important;
+  color: rgb(182, 211, 16);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font: bold 20px sans-serif;
+  transform: translate3d(-50%, -50%);
+  transition: 1s;
+  animation: pulse 1.5s infinite;
+}
+
+.splash-logo.hover{
+  color: rgba(0 0 0);
+  transition: 1s;
+  text-shadow: 0 0 120px rgb(0,0,0);
+}
+
+@keyframes fadein {
+  from {
+    opacity:0
+  }
+  to {
+    opacity:1
+  }
+}
+@keyframes spin {
+  0%,100% {
+    transform: rotate(0deg) scale(1)
+  }
+  50%     {
+    transform: rotate(720deg) scale(0.5)
+  }
+}
+
+@keyframes pulse {
+  0%,100% {
+    letter-spacing:5px;
+    left: calc(50% + 5px);
+  }
+  50% {
+    letter-spacing: 1.5px;
+    left: 50%;
+  }
+}
+
+.progbar{
+  width: 700px;
+  height: 10px;
+  background-color: #2b2828;
+  position: absolute;
+  border-radius: 1px;
+  overflow: hidden;
+  top: 63%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.progbar .bar{
+  position: absolute;
+  height: 100%;
+  background-color: green;
+  animation: progress 4s normal;
+  animation-fill-mode: forwards;
+}
+
+@keyframes progress{
+  0% {width: 0}
+  100%{width: 100%}
+}
+
+
+
+/*画面遷移の後現れるコンテンツ設定*/
+
+/*bodyにappearクラスがついたら出現*/
+body.appear #container {
+  animation-name:PageAnimeAppear;
+  animation-duration:1s;
+  animation-delay: 0.8s;
+  animation-fill-mode:forwards;
+  opacity: 0;
+}
+
+@keyframes PageAnimeAppear{
+  0% {
+  opacity: 0;
+  }
+  100% {
+  opacity: 1;
+}
+}
+
+
+#footer{
+  background:#000000;
+  padding:20px;
+}
+
+/*========= スクロールダウンのためのCSS ===============*/
+
+/*=== 9-1-2 丸が動いてスクロールを促す ====*/
+
+/*スクロールダウン全体の場所*/
+.scrolldown2{
+  /*描画位置※位置は適宜調整してください*/
+position:absolute;
+bottom:10px;
+left:50%;
+}
+
+/*Scrollテキストの描写*/
+.scrolldown2 span{
+  /*描画位置*/
+position: absolute;
+left:10px;
+bottom:10px;
+  /*テキストの形状*/
+color: #ffffff;
+font-size: 0.7rem;
+letter-spacing: 0.05em;
+/*縦書き設定*/
+-ms-writing-mode: tb-rl;
+  -webkit-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
+}
+
+/* 丸の描写 */
+.scrolldown2:before {
+  content: "";
+  /*描画位置*/
+  position: absolute;
+  bottom:0;
+  left:-4px;
+  /*丸の形状*/
+width:10px;
+height:10px;
+border-radius: 50%;
+background:#741f1f;
+z-index: 5;
+  /*丸の動き1.6秒かけて透過し、永遠にループ*/
+animation:
+  circlemove 1.6s ease-in-out infinite,
+  cirlemovehide 1.6s ease-out infinite;
+}
+
+/*下からの距離が変化して丸の全体が上から下に動く*/
+@keyframes circlemove{
+    0%{bottom:45px;}
+   100%{bottom:-5px;}
+}
+
+/*上から下にかけて丸が透過→不透明→透過する*/
+@keyframes cirlemovehide{
+    0%{opacity:0}
+   50%{opacity:1;}
+  80%{opacity:0.9;}
+100%{opacity:0;}
+}
+
+/* 線の描写 */
+.scrolldown2:after{
+content:"";
+  /*描画位置*/
+position: absolute;
+bottom:0;
+left:0;
+  /*線の形状*/
+width:2px;
+height: 50px;
+background:#eee;
+}
+
+#header{
+  width:100%;
+  height: 100vh;
+  position: relative
+  
+} 
+
+#header:before{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+  width:100%;
+  height: 100vh;
+}
+
+#container2{
+  position: relative;
+  z-index:1;
+  background:#1d1d1dfb;
+  text-align: center;
+}
+
+a {
+  font-size:  20px;
+  text-align: center;
+}
+
+@media screen and (max-width:768px){
+
+    #header,
+    #header:before{
+  height: 90vh;    
+    }
+    
+}
+
+/*========= レイアウトのためのCSS ===============*/
+
+h1{
+	font-size:2.5rem;
+  transition: 1s;
+  
+}
+
+h2{
+	font-size:1.8rem;
+	text-align: center;
+	margin: 0 0 15px 0;
+  padding: 100px 0 100px 0;
+  color: #dfdcdc;
+  letter-spacing: 5px;
+}
+
+h3{
+  font-size: 1.6rem;
+  text-align: left;
+  color: #eee;
+}
+
+p{
+	margin-top:5px;	
+  text-align: center;
+  color: #ffffff;
+}
+
+small{
+	color:#ffffff;
+	display: block;
+	text-align: center;
+}
+
+#header{
+	background:none;
+	color:#fff;
+	text-align: center;
+	padding: 20px;
+}
+
+section{
+
+	padding:30px  0px;
+  align-items: center;
+  justify-content: center;
+}
+
+#footer{
+	background:#000000;
+  text-align: center;
+
+}
+
+footer a {
+  display: inline-block;
+}
+
+
+
+#video-area{
+  position: fixed;
+  z-index: -1;/*最背面に設定*/
+  top: 0;
+  right:0;
+  left:0;
+  bottom:0;
+  overflow: hidden;
+}
+
+#video {
+  /*天地中央配置*/
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*縦横幅指定*/
+  width: 177.77777778vh; /* 16:9 の幅→16 ÷ 9＝ 177.77% */
+  height: 56.25vw; /* 16:9の幅 → 9 ÷ 16 = 56.25% */
+  min-height: 100%;
+  min-width: 100%;
+}
+
+h18{
+   font-size:4rem;
+    letter-spacing:8px;
+    position: fixed;
+    display: inline;
+    top: 49%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    color:#ffffff;
+    text-shadow: 0 0 15px #666;
+    text-align: center;
+    transition: 1.5s;
+    font-family: 'roboto' suns-serif ;
+    font-weight: 900px;
+    white-space: nowrap;
+}
+
+h18:hover{
+  color: #4b3e3e;
+  text-shadow: 0 0 120px rgb(41, 39, 35);
+  transition: 1s;
+}
+
+h19{
+  font-size: 25px;
+    letter-spacing: 5px;
+    position: fixed;
+    top: 56%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    color:#eee;
+    text-shadow: 0 0 15px #666;
+    text-align: center;
+    transition: 1.5s;
+    white-space: nowrap;
+}
+
+h19:hover{
+  color: #4b3e3e;
+  text-shadow: 0 0 120px rgb(41, 39, 35);
+  transition: 1s;
+}
+
+
+nav {
+  position: fixed;
+  top: 10;
+  right: 30px;
+  padding: 10px;
+  font-size: 20px;
+  z-index:5;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #ffffff;
+  transition: 1s;
+}
+
+nav a:hover {
+  color: rgba(68, 63, 50, 0.822);
+  text-shadow: 0 0 240px rgb(44, 42, 35);
+  transition: 0s;
+}
+
+
+.content {
+  width: 1150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+}
+
+.content .image{
+  position: relative;
+  width: 550px;
+  height: 400px;
+  overflow: hidden;
+}
+
+.content .image img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  z-index: 10;
+  
+
+}
+
+
+.container3{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+}
+
+.content .text-box{
+  z-index: 20;
+  background: rgb(255,255,255,0.1);
+  padding: 40px;
+  max-width: 400px;
+  transform: translate(-80px,50px);
+  backdrop-filter:blur(20px);
+  border-radius: 10px;
+  border-radius: 1px soild rgb(0, 0, 0);
+}
+
+.content .text-box h3{
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.media-icon {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.media-icon a {
+  color: rgb(255, 255, 255);
+  font-size: 1.7rem;
+  letter-spacing: 10px;
+}
+
+.media-icon a2 {
+  color: rgb(255, 255, 255);
+  font-size: 1.7rem;
+  letter-spacing: 10px;
+}
+
+
+h21{
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  padding: 10px;
+  font-size: 20px;
+  z-index:5;
+} 
+
+small{
+  margin: 20px;
+}
+
+/* Font AwesomeアイコンのCDNを読み込む */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+/* リンクのスタイルを設定 */
+.instagram-link a2 {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* アイコンのスタイルを設定 */
+.instagram-link i {
+    margin-right: 5px;
+}
+
+/* マウスオーバー時のスタイルを設定 */
+.instagram-link a2:hover {
+    background-color: #000;
+    color: #fff;
+}
